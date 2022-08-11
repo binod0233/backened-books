@@ -19,4 +19,21 @@ public interface PaymentRepo extends JpaRepository<Payment, Integer> {
 
   @Query(value = "SELECT * FROM [CopennedCRM].[dbo].[payments] where last_modified_date >= :inputDate  ", nativeQuery = true)
     List<Payment> findWeekly(Date inputDate);
+
+    List<Payment> findAllByPayee(String leadName);
+
+    List<Payment> findAllByServiceType(String serviceType);
+
+    List<Payment> findAllByAmountGreaterThan(Double amount);
+    List<Payment> findAllByAmountBetween(Double amount1, Double amount2);
+
+    List<Payment> findAllByAmountLessThanEqual(Double amount);
+
+    List<Payment> findAllByRecipientContainingIgnoreCase(String name);
+
+    List<Payment> findAllByPaymentMethod(String  method);
+
+    List<Payment> findAllByPaymentDateBetween(Date date1, Date date2);
+
+
 }

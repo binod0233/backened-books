@@ -3,6 +3,7 @@ package com.copenned.crm.service;
 
 import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
 import com.copenned.crm.dto.SingleResponse.PaymentResponse;
+import com.copenned.crm.dto.request.PaymentAttributeFilter;
 import com.copenned.crm.model.Payment;
 import com.copenned.crm.repository.PaymentRepo;
 import com.copenned.crm.utilities.Converter;
@@ -10,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 
@@ -52,5 +56,29 @@ public class PaymentService {
 
         return  converter.convertToPaymentList( repository.findAllPaymentByRecipient(teamLead));
     }
+//
+//    /api/payment/clientManager/payments?leadname=””&&serviceType=””&&amount=””&&recepient=””&&paymentMethod=””&&date=””
+//
+    public PaymentsListResponse  filterByAttribute(PaymentAttributeFilter filter)
+    {
+        List<Payment> paymentByLeadname = repository.findAllByPayee(filter.getLeadName());
+        List<Payment> serviceTypeList = repository.findAllByServiceType(filter.getServiceType());
+        List<Payment> amountList  = repository.findAllByAmountBetween(filter.getAmount1(), filter.getAmount2());
+        List<Payment>  recipientList  = repository.findAllByRecipientContainingIgnoreCase(filter.getRecipient());
+        List<Payment>  paymentMethodList = repository.findAllByPaymentMethod(filter.getPaymentMethod());
+        List<Payment>  dateList= repository.findAllByPaymentDateBetween(filter.getDate1(), filter.getDate2());
 
+        List<Payment> combinedList = new ArrayList<>();
+        combinedList.addAll(serviceTypeList);
+        combinedList.addAll(amountList);
+        combinedList.addAll(recipientList);
+        combinedList.addAll(paymentByLeadname);
+        combinedList.addAll(paymentMethodList);
+        combinedList.addAll(dateList);
+        HashSet<Payment> hset = new HashSet<Payment>(combinedList);
+        return converter.convertToPaymentList(new ArrayList<Payment>(hset));
+
+
+
+    }
 }

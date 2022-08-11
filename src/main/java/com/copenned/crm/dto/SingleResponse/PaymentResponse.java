@@ -31,4 +31,5 @@ public class PaymentResponse  {
     private String recipient;
     private String serviceType;
     private String receipt;
+    private String paymentMethod;
 }

@@ -39,6 +39,8 @@ public class AppUser implements Memorialization{
     private String modifiedBy;
     @Column(name = "last_modified_date")
     private Date lastModifiedDate;
+    @Column(name = "activeFlag")
+    private Boolean activeFlag;
 
 
     public AppUser(AppUser appUser) {

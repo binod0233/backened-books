@@ -54,5 +54,7 @@ public class Payment extends Extended implements Memorialization {
     private String modifiedBy;
     @Column(name = "last_modified_date")
     private Date lastModifiedDate= new Date();
+    @Column(name = "payment_method")
+    private String paymentMethod;
 
 }
