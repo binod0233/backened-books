@@ -1,8 +1,8 @@
 package com.copenned.crm.utilities;
 
 
-import com.copenned.crm.dto.response.ListResponse.*;
-import com.copenned.crm.dto.response.SingleResponse.*;
+import com.copenned.crm.dto.ListResponse.*;
+import com.copenned.crm.dto.SingleResponse.*;
 import com.copenned.crm.model.*;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

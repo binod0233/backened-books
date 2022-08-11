@@ -1,16 +1,12 @@
 package com.copenned.crm.service;
 
-import com.copenned.crm.dto.response.ListResponse.LeadListResponse;
-import com.copenned.crm.dto.response.SingleResponse.LeadResponse;
-import com.copenned.crm.model.AppUser;
+import com.copenned.crm.dto.ListResponse.LeadListResponse;
+import com.copenned.crm.dto.SingleResponse.LeadResponse;
 import com.copenned.crm.model.Lead;
-import com.copenned.crm.repository.AppUserRepo;
 import com.copenned.crm.repository.LeadRepo;
 import com.copenned.crm.utilities.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class LeadService {

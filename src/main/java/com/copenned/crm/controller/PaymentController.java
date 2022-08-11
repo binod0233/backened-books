@@ -1,7 +1,7 @@
 package com.copenned.crm.controller;
 
-import com.copenned.crm.dto.response.ListResponse.PaymentsListResponse;
-import com.copenned.crm.dto.response.SingleResponse.PaymentResponse;
+import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
+import com.copenned.crm.dto.SingleResponse.PaymentResponse;
 import com.copenned.crm.model.Payment;
 import com.copenned.crm.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;

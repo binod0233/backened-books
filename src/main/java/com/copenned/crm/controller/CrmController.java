@@ -1,21 +1,13 @@
 package com.copenned.crm.controller;
 
-import com.copenned.crm.dto.response.ListResponse.*;
-import com.copenned.crm.dto.response.SingleResponse.*;
-import com.copenned.crm.model.Account;
+import com.copenned.crm.dto.ListResponse.AppUsersListResponse;
+import com.copenned.crm.dto.SingleResponse.AppUserResponse;
 import com.copenned.crm.model.AppUser;
-import com.copenned.crm.model.Payment;
-import com.copenned.crm.service.AccountService;
 import com.copenned.crm.service.AppUserService;
-import com.copenned.crm.service.PaymentService;
-import com.copenned.crm.model.*;
-import com.copenned.crm.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
 @Component
 @RestController
 @RequestMapping("/api")

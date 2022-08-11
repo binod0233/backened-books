@@ -1,7 +1,7 @@
 package com.copenned.crm.controller;
 
-import com.copenned.crm.dto.response.ListResponse.AccountListResponse;
-import com.copenned.crm.dto.response.SingleResponse.AccountResponse;
+import com.copenned.crm.dto.ListResponse.AccountListResponse;
+import com.copenned.crm.dto.SingleResponse.AccountResponse;
 import com.copenned.crm.model.Account;
 import com.copenned.crm.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;

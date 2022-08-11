@@ -1,15 +1,16 @@
-package com.copenned.crm.dto.response.SingleResponse;
+package com.copenned.crm.dto.SingleResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SalesManResponse {
-
+public class TeamLeadResponse {
     private int id;
-    private String salesData;
+    private int salesmanId;
     private int userId;
+
 }

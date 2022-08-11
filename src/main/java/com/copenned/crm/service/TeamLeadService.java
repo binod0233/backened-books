@@ -1,14 +1,12 @@
 package com.copenned.crm.service;
 
-import com.copenned.crm.dto.response.ListResponse.TeamLeadListResponse;
-import com.copenned.crm.dto.response.SingleResponse.TeamLeadResponse;
+import com.copenned.crm.dto.ListResponse.TeamLeadListResponse;
+import com.copenned.crm.dto.SingleResponse.TeamLeadResponse;
 import com.copenned.crm.model.TeamLead;
 import com.copenned.crm.repository.TeamLeadRepo;
 import com.copenned.crm.utilities.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TeamLeadService {

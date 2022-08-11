@@ -1,4 +1,4 @@
-package com.copenned.crm.dto.response.SingleResponse;
+package com.copenned.crm.dto.SingleResponse;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

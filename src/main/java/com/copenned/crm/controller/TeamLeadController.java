@@ -1,12 +1,8 @@
 package com.copenned.crm.controller;
 
-import com.copenned.crm.dto.response.ListResponse.LeadListResponse;
-import com.copenned.crm.dto.response.ListResponse.TeamLeadListResponse;
-import com.copenned.crm.dto.response.SingleResponse.LeadResponse;
-import com.copenned.crm.dto.response.SingleResponse.TeamLeadResponse;
-import com.copenned.crm.model.Lead;
+import com.copenned.crm.dto.ListResponse.TeamLeadListResponse;
+import com.copenned.crm.dto.SingleResponse.TeamLeadResponse;
 import com.copenned.crm.model.TeamLead;
-import com.copenned.crm.service.LeadService;
 import com.copenned.crm.service.TeamLeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

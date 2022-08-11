@@ -1,7 +1,7 @@
 package com.copenned.crm.service;
 
-import com.copenned.crm.dto.response.ListResponse.SalesManListResponse;
-import com.copenned.crm.dto.response.SingleResponse.SalesManResponse;
+import com.copenned.crm.dto.ListResponse.SalesManListResponse;
+import com.copenned.crm.dto.SingleResponse.SalesManResponse;
 import com.copenned.crm.model.SalesMan;
 import com.copenned.crm.repository.SalesManRepo;
 import com.copenned.crm.utilities.Converter;

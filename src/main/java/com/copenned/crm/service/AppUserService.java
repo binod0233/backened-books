@@ -1,7 +1,7 @@
 package com.copenned.crm.service;
 
-import com.copenned.crm.dto.response.ListResponse.AppUsersListResponse;
-import com.copenned.crm.dto.response.SingleResponse.AppUserResponse;
+import com.copenned.crm.dto.ListResponse.AppUsersListResponse;
+import com.copenned.crm.dto.SingleResponse.AppUserResponse;
 import com.copenned.crm.model.AppUser;
 //import com.copenned.crm.model.CustomAppUserDetails;
 import com.copenned.crm.repository.AppUserRepo;
@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.userdetails.UserDetailsService;
 //import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class AppUserService{

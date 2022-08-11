@@ -1,7 +1,7 @@
 package com.copenned.crm.controller;
 
-import com.copenned.crm.dto.response.ListResponse.LeadListResponse;
-import com.copenned.crm.dto.response.SingleResponse.LeadResponse;
+import com.copenned.crm.dto.ListResponse.LeadListResponse;
+import com.copenned.crm.dto.SingleResponse.LeadResponse;
 import com.copenned.crm.model.Lead;
 import com.copenned.crm.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;

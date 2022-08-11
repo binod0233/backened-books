@@ -1,6 +1,6 @@
-package com.copenned.crm.dto.response.ListResponse;
+package com.copenned.crm.dto.ListResponse;
 
-import com.copenned.crm.dto.response.SingleResponse.SalesManResponse;
+import com.copenned.crm.dto.SingleResponse.SalesManResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
