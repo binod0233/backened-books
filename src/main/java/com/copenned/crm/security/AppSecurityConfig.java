@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 //@Configuration
 //@EnableWebSecurity
 
-public class AppSecurityConfig {
+public class AppSecurityConfig   {
 
 //    @Autowired
 //    private UserDetailsService userDetailsService;
@@ -30,7 +30,8 @@ public class AppSecurityConfig {
 //    @Override
 //    protected void configure(HttpSecurity http) throws Exception {
 //        http.authorizeRequests()
-//                .antMatchers("/**").permitAll()
+//                .antMatchers("/login").permitAll()
+//                .antMatchers("/api/payment/**").hasAuthority("salesman")
 //                .anyRequest()
 //                .authenticated()
 //                .and()

@@ -8,7 +8,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -98,7 +101,11 @@ public class Converter {
         }
         return new SalesManListResponse(responseList);
     }
-
+    public Date dateConverter(LocalDateTime week)
+    {
+        Date finalDate= Date.from(week.atZone(ZoneId.systemDefault()).toInstant());
+        return finalDate;
+    }
 
 
 

@@ -1,16 +1,16 @@
 package com.copenned.crm;
 
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebFlux;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @SpringBootApplication
 @EnableJpaRepositories
-@EnableSwagger2WebMvc
-@EnableSwagger2WebFlux
+@OpenAPIDefinition(info = @Info(title = "Books Backend", version = "2.0", description = "Books Backend"))
+
 public class CrmApplication {
 
 	public static void main(String[] args) {

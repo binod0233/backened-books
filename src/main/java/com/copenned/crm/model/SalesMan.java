@@ -31,10 +31,10 @@ public class SalesMan extends Extended implements Memorialization {
 
     @Column (name="platform")
     private String platform;
+    @Column(name = "team")
 
-    @Column(name = "user_id")
     private String team;
 
-    @Column(name = "team")
+    @Column(name = "user_id")
     private int userId;
 }

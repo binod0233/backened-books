@@ -8,7 +8,7 @@ public enum Roles {
 
     TeamLead,
 
-    ADMIN;
+    ADMIN
 
 
 }

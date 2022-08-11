@@ -9,6 +9,9 @@ import com.copenned.crm.utilities.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Service
 
 public class PaymentService {
@@ -24,15 +27,6 @@ public class PaymentService {
 
 
     }
-    public PaymentResponse updatePayment(Payment payment){
-        Payment existingPayment = repository.findById(payment.getPaymentId()).orElse(null);
-        existingPayment.setAmount(payment.getAmount());
-        existingPayment.setRemarks(payment.getRemarks());
-        existingPayment.setModifiedBy(payment.getModifiedBy());
-        return converter.convertPayment(repository.save(existingPayment));
-
-
-    }
 
     public PaymentsListResponse getPayments(){
         return  converter.convertToPaymentList(repository.findAll());
@@ -43,7 +37,12 @@ public class PaymentService {
     }
 
 
-
+    public PaymentsListResponse getWeeklyPayments() {
+        LocalDateTime week = LocalDateTime.now().minusDays(7);
+        Date finalDate = converter.dateConverter(week);
+        System.out.println(finalDate);
+        return converter.convertToPaymentList(repository.findWeekly(finalDate));
+    }
     public PaymentsListResponse getPaymentsByClientManager(String clientManager){
         return  converter.convertToPaymentList( repository.findAllPaymentByRecipient(clientManager));
     }
