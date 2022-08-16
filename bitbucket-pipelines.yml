@@ -20,5 +20,5 @@ pipelines:
                 AWS_ACCESS_KEY_ID: 'AKIAZNDUWQHL2MX3GWFL'
                 AWS_SECRET_ACCESS_KEY: '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' 
                 AWS_DEFAULT_REGION: 'us-east-1' 
-                APPLICATION_NAME: 'books_backend'
+                APPLICATION_NAME: 'books-backend-dev'
                 ENVIRONMENT_NAME: 'test'
