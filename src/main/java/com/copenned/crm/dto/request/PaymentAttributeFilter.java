@@ -11,11 +11,15 @@ import java.util.Date;
 @NoArgsConstructor
 public class PaymentAttributeFilter {
    private String leadName;
-    private  String serviceType;
+ private String teamLead;
+ private  String serviceType;
     private Double amount1;
     private  Double amount2;
     private  String recipient;
     private   String paymentMethod;
     private   Date date1;
     private   Date date2;
+
+
+
 }

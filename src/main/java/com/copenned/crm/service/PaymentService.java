@@ -41,11 +41,80 @@ public class PaymentService {
     }
 
 
-    public PaymentsListResponse getWeeklyPayments() {
-        LocalDateTime week = LocalDateTime.now().minusDays(7);
-        Date finalDate = converter.dateConverter(week);
-        System.out.println(finalDate);
-        return converter.convertToPaymentList(repository.findWeekly(finalDate));
+    public PaymentsListResponse getWeeklyPayments(String period) {
+
+        if(period.equals("monthly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(30);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findWeekly(finalDate));
+        }
+        else if(period.equals("semiMonthly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(15);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findWeekly(finalDate));
+        }
+        else if(period.equals("weekly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(7);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findWeekly(finalDate));
+
+        }
+else{
+    return null;
+        }
+    }
+
+    public PaymentsListResponse getTeamLeadWeeklyPayments(String period,String teamLead) {
+        if(period.equals("monthly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(30);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findTeamLeadDataWeekly(finalDate,teamLead));
+        }
+        else if(period.equals("semiMonthly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(15);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findTeamLeadDataWeekly(finalDate,teamLead));
+        }
+        else if(period.equals("weekly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(7);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findTeamLeadDataWeekly(finalDate,teamLead));
+
+        }
+        else{
+            return null;
+        }
+    }
+
+    public PaymentsListResponse getClientManagerWeeklyPayments(String period, String clientManager) {
+        if(period.equals("monthly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(30);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findClientManagerDataWeekly(finalDate,clientManager));
+        }
+        else if(period.equals("semiMonthly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(15);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findClientManagerDataWeekly(finalDate,clientManager));
+        }
+        else if(period.equals("weekly")){
+            LocalDateTime timePeriod = LocalDateTime.now().minusDays(7);
+            Date finalDate = converter.dateConverter(timePeriod);
+            System.out.println(finalDate);
+            return converter.convertToPaymentList(repository.findClientManagerDataWeekly(finalDate,clientManager));
+
+        }
+        else{
+            return null;
+        }
     }
     public PaymentsListResponse getPaymentsByClientManager(String clientManager){
         return  converter.convertToPaymentList( repository.findAllPaymentByRecipient(clientManager));
@@ -67,6 +136,50 @@ public class PaymentService {
         List<Payment>  recipientList  = repository.findAllByRecipientContainingIgnoreCase(filter.getRecipient());
         List<Payment>  paymentMethodList = repository.findAllByPaymentMethod(filter.getPaymentMethod());
         List<Payment>  dateList= repository.findAllByPaymentDateBetween(filter.getDate1(), filter.getDate2());
+
+        List<Payment> combinedList = new ArrayList<>();
+        combinedList.addAll(serviceTypeList);
+        combinedList.addAll(amountList);
+        combinedList.addAll(recipientList);
+        combinedList.addAll(paymentByLeadname);
+        combinedList.addAll(paymentMethodList);
+        combinedList.addAll(dateList);
+        HashSet<Payment> hset = new HashSet<Payment>(combinedList);
+        return converter.convertToPaymentList(new ArrayList<Payment>(hset));
+
+
+
+    }
+
+    public PaymentsListResponse  filterClientManagerPaymentsByAttribute(PaymentAttributeFilter filter)
+    {
+        List<Payment> paymentByLeadname = repository.findAllClientManagerPaymentsByPayee(filter.getLeadName(),filter.getRecipient());
+        List<Payment> serviceTypeList = repository.findAllClientManagerPaymentsByServiceType(filter.getServiceType(),filter.getRecipient());
+        List<Payment> amountList  = repository.findAllByClientManagerPaymentsAmountBetween(filter.getAmount1(), filter.getAmount2(),filter.getRecipient());
+        List<Payment>  paymentMethodList = repository.findAllClientManagerPaymentsByPaymentMethod(filter.getPaymentMethod(),filter.getRecipient());
+        List<Payment>  dateList= repository.findAllClientManagerPaymentsByPaymentDateBetween(filter.getDate1(), filter.getDate2(),filter.getRecipient());
+
+        List<Payment> combinedList = new ArrayList<>();
+        combinedList.addAll(serviceTypeList);
+        combinedList.addAll(amountList);
+        combinedList.addAll(paymentByLeadname);
+        combinedList.addAll(paymentMethodList);
+        combinedList.addAll(dateList);
+        HashSet<Payment> hset = new HashSet<Payment>(combinedList);
+        return converter.convertToPaymentList(new ArrayList<Payment>(hset));
+
+
+
+    }
+
+    public PaymentsListResponse  filterTeamLeadPaymentsByAttribute(PaymentAttributeFilter filter)
+    {
+        List<Payment> paymentByLeadname = repository.findAllTeamLeadPaymentsByPayee(filter.getLeadName(),filter.getTeamLead());
+        List<Payment> serviceTypeList = repository.findAllTeamLeadPaymentsByServiceType(filter.getServiceType(),filter.getTeamLead());
+        List<Payment> amountList  = repository.findAllTeamLeadPaymentsByAmountBetween(filter.getAmount1(), filter.getAmount2(),filter.getTeamLead());
+        List<Payment>  recipientList  = repository.findAllTeamLeadPaymentsByRecipientContainingIgnoreCase(filter.getRecipient(),filter.getTeamLead());
+        List<Payment>  paymentMethodList = repository.findAllTeamLeadPaymentsByPaymentMethod(filter.getPaymentMethod(),filter.getTeamLead());
+        List<Payment>  dateList= repository.findAllTeamLeadPaymentsByPaymentDateBetween(filter.getDate1(), filter.getDate2(),filter.getTeamLead());
 
         List<Payment> combinedList = new ArrayList<>();
         combinedList.addAll(serviceTypeList);

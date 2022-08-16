@@ -26,10 +26,17 @@ public class PaymentController {
         return paymentService.savePayment(payment);
     }
 
-    @GetMapping("/payment/weekly-payments")
-    public PaymentsListResponse weeklyPayments() {
-        System.out.println("Login");
-        return paymentService.getWeeklyPayments();
+    @GetMapping("/payment/weekly-payments/team-lead/{period}/{teamLead}")
+    public PaymentsListResponse weeklyTeamLeadPayments(@PathVariable String period, @PathVariable String teamLead) {
+        return paymentService.getTeamLeadWeeklyPayments(period,teamLead);
+    }
+    @GetMapping("/payment/weekly-payments/client-manager/{period}/{clientManager}")
+    public PaymentsListResponse weeklyClientManagerPayments(@PathVariable String period,@PathVariable String clientManager) {
+        return paymentService.getClientManagerWeeklyPayments(period,clientManager);
+    }
+    @GetMapping("/payment/weekly-payments/{period}")
+    public PaymentsListResponse weeklyPayments(@PathVariable String period) {
+        return paymentService.getWeeklyPayments(period);
     }
 
     @GetMapping("/payment/payments")
@@ -61,5 +68,17 @@ public class PaymentController {
     public PaymentsListResponse paymentAttributeFilter(@RequestBody @Valid PaymentAttributeFilter filter)
     {
         return paymentService.filterByAttribute(filter);
+    }
+
+    @PostMapping("/payment/attributeSearch/clientManager")
+    public PaymentsListResponse clientManagerPaymentAttributeFilter(@RequestBody @Valid PaymentAttributeFilter filter)
+    {
+        return paymentService.filterClientManagerPaymentsByAttribute(filter);
+    }
+
+    @PostMapping("/payment/attributeSearch/teamLead")
+    public PaymentsListResponse teamLeadPaymentAttributeFilter(@RequestBody @Valid PaymentAttributeFilter filter)
+    {
+        return paymentService.filterTeamLeadPaymentsByAttribute(filter);
     }
 }

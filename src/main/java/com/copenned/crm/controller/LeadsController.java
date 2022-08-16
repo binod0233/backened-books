@@ -1,12 +1,19 @@
 package com.copenned.crm.controller;
 
 import com.copenned.crm.dto.ListResponse.LeadListResponse;
+import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
 import com.copenned.crm.dto.SingleResponse.LeadResponse;
+import com.copenned.crm.dto.SingleResponse.PaymentResponse;
+import com.copenned.crm.dto.request.LeadAttributeFilter;
+import com.copenned.crm.dto.request.PaymentAttributeFilter;
 import com.copenned.crm.model.Lead;
+import com.copenned.crm.model.Payment;
 import com.copenned.crm.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Component
 @RestController
@@ -20,6 +27,40 @@ public class LeadsController {
         System.out.println("apple");
         return leadService.saveLead(lead);
     }
+
+    @GetMapping("/lead/weekly-payments/{period}")
+    public LeadListResponse weeklyTeamLEadPayments(@PathVariable String period) {
+        return leadService.getWeeklyLeads(period);
+    }
+
+    @GetMapping("/lead/weekly-payments/team-lead/{period}/{teamLead}")
+    public LeadListResponse weeklyTeamLEadPayments(@PathVariable String period, @PathVariable String teamLead) {
+        return leadService.getTeamLeadWeeklyLeads(period,teamLead);
+    }
+    @GetMapping("/lead/weekly-payments/client-manager/{period}/{clientManager}")
+    public LeadListResponse weeklyClientManagerPayments(@PathVariable String period,@PathVariable String clientManager) {
+        return leadService.getClientManagerWeeklyLeads(period,clientManager);
+    }
+
+    @PostMapping("/lead/attributeSearch")
+    public LeadListResponse leadAttributeFilter(@RequestBody @Valid LeadAttributeFilter filter)
+    {
+        return leadService.filterByAttribute(filter);
+    }
+
+    @PostMapping("/lead/attributeSearch/clientManager")
+    public LeadListResponse clientManagerLeadAttributeFilter(@RequestBody @Valid LeadAttributeFilter filter)
+    {
+        return leadService.filterClientManagerLeadsByAttribute(filter);
+    }
+
+    @PostMapping("/lead/attributeSearch/teamLead")
+    public LeadListResponse teamLeadLeadAttributeFilter(@RequestBody @Valid LeadAttributeFilter filter)
+    {
+        return leadService.filterTeamLeadLeadsByAttribute(filter);
+    }
+
+
 
     @GetMapping("/lead/leads")
     public LeadListResponse findAllLeads(){

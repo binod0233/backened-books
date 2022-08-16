@@ -25,23 +25,18 @@ public class Payment extends Extended implements Memorialization {
     private Date paymentDate=new Date();
     @Column(name = "user_id")
     private int userId;
-
     @Column(name = "status")
     private String status;
-
     @Column(name = "payee")
     private String payee;
-
     @Column(name = "recipient")
     private String recipient;
-
     @Column(name = "service_type")
+    private String teamLead;
+    @Column(name = "team_lead")
     private String serviceType;
-
     @Column(name = "receipt")
     private String receipt;
-
-
     @Column(name = "amount")
     private Double amount;
     @Column(name = "remarks")
