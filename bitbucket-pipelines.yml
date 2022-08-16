@@ -13,16 +13,6 @@ pipelines:
   default:
     - parallel:
       - step:
-          name: Build and Test
-          script:
-              - mvn -B verify --file pom.xml
-          caches:
-            - maven
-          after-script:
-            - pipe: atlassian/checkstyle-report:0.3.0
-              variables:
-                DEBUG: "true"
-      - step:
           name: Security Scan
           script:
             # Run a security scan for sensitive data.
