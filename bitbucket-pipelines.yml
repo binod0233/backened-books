@@ -17,8 +17,9 @@ pipelines:
             - pipe: atlassian/checkstyle-report:0.3.0
             - pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.2
               variables:
-                AWS_ACCESS_KEY_ID: 'AKIAZNDUWQHL2MX3GWFL'
-                AWS_SECRET_ACCESS_KEY: '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' 
-                AWS_DEFAULT_REGION: 'us-east-1' 
-                APPLICATION_NAME: 'books-backend-dev'
-                ENVIRONMENT_NAME: 'test'
+                  AWS_ACCESS_KEY_ID: '$AWS_ACCESS_KEY_ID'
+                  AWS_SECRET_ACCESS_KEY: '$AWS_ACCESS_KEY_SECRET'
+                  AWS_DEFAULT_REGION: 'eu-west-1'
+                  APPLICATION_NAME: 'books-backend-dev'
+                  ENVIRONMENT_NAME: 'Booksbackenddev-env'
+                  ZIP_FILE: 'target/spring-aws-pipeline-$version.jar'
