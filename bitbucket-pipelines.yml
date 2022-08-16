@@ -14,7 +14,7 @@ pipelines:
       - step:
           name: Build
           script:
-            - mvnw package -B
+            - ./mvnw package -B
             - zip -j application.zip target/hello-world-0.0.1-SNAPSHOT.jar
           artifacts:
             - application.zip
