@@ -14,7 +14,7 @@ pipelines:
       - step:
           name: Build
           script:
-            - chmod +x deploy-hockey-dev.sh ./mvnw package -DskipTests
+            - chmod +x ./mvnw package -DskipTests
             - zip -j application.zip target/hello-world-0.0.1-SNAPSHOT.jar
           artifacts:
             - application.zip
