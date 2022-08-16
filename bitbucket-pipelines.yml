@@ -20,7 +20,7 @@ pipelines:
             - application.zip
       - step:
           name: Deploy to Dev
-          deployment: Dev
+          deployment: Test
           trigger: automatic
           script:
             - pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.2
