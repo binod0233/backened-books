@@ -5,9 +5,11 @@ import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
 import com.copenned.crm.dto.SingleResponse.LeadResponse;
 import com.copenned.crm.dto.request.LeadAttributeFilter;
 import com.copenned.crm.dto.request.PaymentAttributeFilter;
+import com.copenned.crm.dto.request.PotentialBody;
 import com.copenned.crm.model.Lead;
 import com.copenned.crm.model.Payment;
 import com.copenned.crm.repository.LeadRepo;
+import com.copenned.crm.repository.PaymentRepo;
 import com.copenned.crm.utilities.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class LeadService {
 
     @Autowired
     private LeadRepo repository;
+    private PaymentRepo paymentRepository;
     @Autowired
     private Converter converter;
 
@@ -132,9 +135,11 @@ public class LeadService {
         return converter.convertToLeadList(repository.findAllByClientManager(source));
     }
 
-    public LeadResponse updateLeadDifficulty(Lead lead, int leadId) {
+    public LeadResponse updateLeadDifficulty( PotentialBody potentialBody, int leadId) {
         Lead existingLead = repository.findById(leadId).orElse(null);
-        existingLead.setPotential(lead.getPotential());
+        existingLead.setPotential(potentialBody.getPotential());
+        paymentRepository.save(new Payment(){{setPayee(potentialBody.getLeadName());setRemarks(potentialBody.getRemarks());setClientId(potentialBody.getLeadId());setTeamLead(potentialBody.getTeamLead());}});
+
 
         return converter.convertLead(repository.save(existingLead));
     }
@@ -143,8 +148,15 @@ public class LeadService {
         Lead existingLead = repository.findById(lead.getId()).orElse(null);
         existingLead.setName(lead.getName());
         existingLead.setEmail(lead.getEmail());
+        existingLead.setWork(lead.getWork());
         existingLead.setPhone(lead.getPhone());
         existingLead.setSource(lead.getSource());
+        existingLead.setSocialMedia(lead.getSocialMedia());
+        existingLead.setTeamLead(lead.getTeamLead());
+        existingLead.setRecipient(lead.getRecipient());
+
+
+
         return converter.convertLead(repository.save(existingLead));
     }
 

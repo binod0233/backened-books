@@ -6,6 +6,7 @@ import com.copenned.crm.dto.SingleResponse.LeadResponse;
 import com.copenned.crm.dto.SingleResponse.PaymentResponse;
 import com.copenned.crm.dto.request.LeadAttributeFilter;
 import com.copenned.crm.dto.request.PaymentAttributeFilter;
+import com.copenned.crm.dto.request.PotentialBody;
 import com.copenned.crm.model.Lead;
 import com.copenned.crm.model.Payment;
 import com.copenned.crm.service.LeadService;
@@ -82,8 +83,8 @@ public class LeadsController {
     }
 
     @PutMapping("/lead/leads/changepotential/{leadId}")
-    public LeadResponse updateLeadDifficulty(@RequestBody  Lead lead,@PathVariable int leadId){
-        return leadService.updateLeadDifficulty(lead,leadId);
+    public LeadResponse updateLeadDifficulty(@RequestBody PotentialBody potentialBody, @PathVariable int leadId){
+        return leadService.updateLeadDifficulty(potentialBody,leadId);
     }
 
     @PutMapping("/lead/teamlead/update")

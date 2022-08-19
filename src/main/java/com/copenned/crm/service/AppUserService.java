@@ -33,9 +33,20 @@ public class AppUserService{
     public AppUserResponse getAppUserById(int id){
         return converter.convertAppUser(repository.findById(id).orElse(null));
     }
-    public AppUserResponse getAppUserByName(String name){
-        return converter.convertAppUser(repository.findByUserName(name));
+    public AppUserResponse appUserLogin(String email){
+        return converter.convertAppUser(repository.findByEmail(email));
     }
+
+    public AppUsersListResponse appUserByTeamLead(){
+        String teamLead = "teamlead";
+        return converter.convertToAppUsersList(repository.findAllByRole( teamLead));
+    }
+
+    public AppUsersListResponse appUserByClientManager(){
+        String clientManager = "clientmanager";
+        return converter.convertToAppUsersList(repository.findAllByRole( clientManager));
+    }
+
 
 
     public String deleteAppUser(int id){

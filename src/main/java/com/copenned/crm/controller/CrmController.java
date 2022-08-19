@@ -47,9 +47,20 @@ public class CrmController {
         return service.getAppUserById(id);
     }
 
-    @GetMapping("/user/appUser/byname/{name}")
-    public AppUserResponse findAppUserByName(@PathVariable String name){
-        return service.getAppUserByName(name);
+    @GetMapping("/user/login/{email}")
+    public AppUserResponse findAppUserByName(@PathVariable String email){
+
+        return service.appUserLogin(email);
+    }
+    @GetMapping("/user/teamlead/getAll")
+    public AppUsersListResponse findAppUserByTeamLead(){
+
+        return service.appUserByTeamLead();
+    }
+    @GetMapping("/user/clientmanager/getAll")
+    public AppUsersListResponse findAppUserByClientManager(){
+
+        return service.appUserByClientManager();
     }
 
 
