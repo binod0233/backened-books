@@ -35,6 +35,10 @@ public class SalesMan extends Extended implements Memorialization {
 
     private String team;
 
+    @Column(name = "team_lead")
+
+    private String teamLead;
+
     @Column(name = "user_id")
     private int userId;
 }

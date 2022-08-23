@@ -30,7 +30,7 @@ public class SalesManService {
     }
 
     public SalesManListResponse getSalesmanByTeamLead( String teamlead){
-        return converter.convertToSalesmanList(repository.findAllByTeam(teamlead));
+        return converter.convertToSalesmanList(repository.findAllByTeamLead(teamlead));
     }
 
 

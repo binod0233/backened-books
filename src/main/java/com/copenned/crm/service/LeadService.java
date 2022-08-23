@@ -12,6 +12,7 @@ import com.copenned.crm.repository.LeadRepo;
 import com.copenned.crm.repository.PaymentRepo;
 import com.copenned.crm.utilities.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,9 +27,11 @@ public class LeadService {
 
     @Autowired
     private LeadRepo repository;
-    private PaymentRepo paymentRepository;
+    @Autowired
+    private PaymentService paymentRepository;
     @Autowired
     private Converter converter;
+
 
     public LeadResponse saveLead(Lead lead) {
 
@@ -135,10 +138,17 @@ public class LeadService {
         return converter.convertToLeadList(repository.findAllByClientManager(source));
     }
 
+    public LeadListResponse getLeadsByTeamLead(String source) {
+        return converter.convertToLeadList(repository.findAllByTeamLead(source));
+    }
+
     public LeadResponse updateLeadDifficulty( PotentialBody potentialBody, int leadId) {
         Lead existingLead = repository.findById(leadId).orElse(null);
         existingLead.setPotential(potentialBody.getPotential());
-        paymentRepository.save(new Payment(){{setPayee(potentialBody.getLeadName());setRemarks(potentialBody.getRemarks());setClientId(potentialBody.getLeadId());setTeamLead(potentialBody.getTeamLead());}});
+        if(potentialBody.getPotential().equals("won")){
+            paymentRepository.savePayment(new Payment(){{setPayee(potentialBody.getLeadName());setRecipient(potentialBody.getClientManager());setRemarks(potentialBody.getRemarks());setClientId(potentialBody.getLeadId());setTeamLead(potentialBody.getTeamLead());}});
+        }
+
 
 
         return converter.convertLead(repository.save(existingLead));

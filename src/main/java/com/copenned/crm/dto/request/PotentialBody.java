@@ -13,6 +13,7 @@ public class PotentialBody {
         private String teamLead;
         private int leadId;
         private String remarks = "Just won";
+        private String clientManager;
 
 
 

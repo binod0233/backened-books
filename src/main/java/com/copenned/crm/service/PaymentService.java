@@ -4,6 +4,7 @@ package com.copenned.crm.service;
 import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
 import com.copenned.crm.dto.SingleResponse.PaymentResponse;
 import com.copenned.crm.dto.request.PaymentAttributeFilter;
+import com.copenned.crm.dto.request.PotentialBody;
 import com.copenned.crm.model.Payment;
 import com.copenned.crm.repository.PaymentRepo;
 import com.copenned.crm.utilities.Converter;
@@ -31,6 +32,14 @@ public class PaymentService {
 
 
     }
+
+//    public PaymentResponse createPayment(PotentialBody potentialBody){
+//        paymentRepository.save(new Payment(){{setPayee(potentialBody.getLeadName());setRemarks(potentialBody.getRemarks());setClientId(potentialBody.getLeadId());setTeamLead(potentialBody.getTeamLead());}});
+//
+//        return converter.convertPayment(repository.save(potentialBody));
+
+
+//    }
 
     public PaymentsListResponse getPayments(){
         return  converter.convertToPaymentList(repository.findAll());
@@ -123,7 +132,7 @@ else{
     public PaymentsListResponse getPaymentsByTeamLead(String teamLead){
 
 
-        return  converter.convertToPaymentList( repository.findAllPaymentByRecipient(teamLead));
+        return  converter.convertToPaymentList( repository.findAllPaymentByTeamLead(teamLead));
     }
 //
 //    /api/payment/clientManager/payments?leadname=””&&serviceType=””&&amount=””&&recepient=””&&paymentMethod=””&&date=””

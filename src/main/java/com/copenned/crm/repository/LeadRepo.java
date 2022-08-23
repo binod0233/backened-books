@@ -12,6 +12,8 @@ import java.util.List;
 public interface LeadRepo extends JpaRepository<Lead,Integer> {
     List<Lead> findAllBySource(String source);
     List<Lead> findAllByClientManager(String clientManager);
+    List<Lead> findAllByTeamLead(String clientManager);
+
 
     List<Lead> findAllByName(String leadName);
     List<Lead> findAllByServiceType(String serviceType);
@@ -28,11 +30,11 @@ public interface LeadRepo extends JpaRepository<Lead,Integer> {
     List<Lead> findWeekly(Date inputDate);
 
     //find all payments of week month or 15 days of a clientManager
-    @Query(value = "SELECT * FROM [CopennedCRM].[dbo].[leads] where created_date >= :inputDate AND recepient=:clientManager ", nativeQuery = true)
+    @Query(value = "SELECT * FROM [CopennedCRM].[dbo].[leads] where created_date >= :inputDate AND recipient=:clientManager ", nativeQuery = true)
     List<Lead> findClientManagerDataWeekly(Date inputDate,String clientManager);
 
     //find all payments of week month or 15 days of a teamlead
-    @Query(value = "SELECT * FROM [CopennedCRM].[dbo].[leads] where created_date >= :inputDate AND  recepient=:teamLead", nativeQuery = true)
+    @Query(value = "SELECT * FROM [CopennedCRM].[dbo].[leads] where created_date >= :inputDate AND  recipient=:teamLead", nativeQuery = true)
     List<Lead> findTeamLeadDataWeekly(Date inputDate,String teamLead);
 
 

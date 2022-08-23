@@ -49,10 +49,9 @@ public class PaymentController {
         return paymentService.getPaymentsByClientManager(clientManager);
     }
 
-    @GetMapping("/payment/payments/getAllLeadsOfATeamLead/{teamLead}")
-    public String findAllPaymentsByTeamLead(@PathVariable String teamLead) {
-        return "Logic left";
-//        return paymentService.getPaymentsByTeamLead(teamLead);
+    @GetMapping("/payment/payments/getAllPaymentsOfATeamLead/{teamLead}")
+    public PaymentsListResponse findAllPaymentsByTeamLead(@PathVariable String teamLead) {
+        return paymentService.getPaymentsByTeamLead(teamLead);
     }
 
     //    @PutMapping("/payment/teamlead/update/{id}")

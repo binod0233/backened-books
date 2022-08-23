@@ -10,6 +10,7 @@ import com.copenned.crm.dto.request.PotentialBody;
 import com.copenned.crm.model.Lead;
 import com.copenned.crm.model.Payment;
 import com.copenned.crm.service.LeadService;
+import com.copenned.crm.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,10 @@ import javax.validation.Valid;
 public class LeadsController {
     @Autowired
     private LeadService leadService;
+
+    @Autowired
+    private PaymentService paymentService;
+
     @PostMapping("/lead/registerLead")
     public LeadResponse addAppUser(@RequestBody Lead lead){
         System.out.println("apple");
@@ -79,11 +84,19 @@ public class LeadsController {
     }
     @GetMapping("/lead/leads/getAllLeadsOfAClientManager/{clientManager}")
     public LeadListResponse findAllByClientManager(@PathVariable String clientManager){
+
         return leadService.getLeadsByClientManager(clientManager);
+    }
+
+    @GetMapping("/lead/leads/getAllLeadsOfATeamLead/{teamLead}")
+    public LeadListResponse findAllByTeamLead(@PathVariable String teamLead){
+
+        return leadService.getLeadsByTeamLead(teamLead);
     }
 
     @PutMapping("/lead/leads/changepotential/{leadId}")
     public LeadResponse updateLeadDifficulty(@RequestBody PotentialBody potentialBody, @PathVariable int leadId){
+//        paymentService.addPayment(potentialBody);
         return leadService.updateLeadDifficulty(potentialBody,leadId);
     }
 
