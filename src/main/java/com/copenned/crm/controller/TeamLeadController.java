@@ -27,9 +27,9 @@ public class TeamLeadController {
         return teamLeadService.getTeamLeads();
     }
 
-    @GetMapping("/teamlead/teamleadId/{id}")
-    public TeamLeadResponse findTeamLeadById(@PathVariable int id){
-        return teamLeadService.getTeamLeadById(id);
+    @GetMapping("/teamlead/teamleadId/{name}")
+    public TeamLeadResponse findTeamLeadByTeamLead(@PathVariable String name){
+        return teamLeadService.getTeamLeadByName(name);
     }
 
     @DeleteMapping("/teamlead/delete/{id}")
