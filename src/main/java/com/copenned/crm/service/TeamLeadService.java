@@ -26,7 +26,7 @@ public class TeamLeadService {
     }
 
     public TeamLeadResponse getTeamLeadByName(String name){
-        return converter.convertTeamLead((TeamLead) repository.findByName(name));
+        return converter.convertTeamLead((TeamLead) repository.findAllByName(name));
     }
 
 

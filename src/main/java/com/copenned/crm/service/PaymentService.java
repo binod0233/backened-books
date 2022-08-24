@@ -28,6 +28,7 @@ public class PaymentService {
     private Converter converter;
 
     public PaymentResponse savePayment(Payment payment){
+        System.out.println("trigerred");
         return converter.convertPayment(repository.save(payment));
 
 

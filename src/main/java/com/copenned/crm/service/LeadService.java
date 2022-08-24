@@ -3,6 +3,7 @@ package com.copenned.crm.service;
 import com.copenned.crm.dto.ListResponse.LeadListResponse;
 import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
 import com.copenned.crm.dto.SingleResponse.LeadResponse;
+import com.copenned.crm.dto.SingleResponse.PaymentResponse;
 import com.copenned.crm.dto.request.LeadAttributeFilter;
 import com.copenned.crm.dto.request.PaymentAttributeFilter;
 import com.copenned.crm.dto.request.PotentialBody;
@@ -145,8 +146,16 @@ public class LeadService {
     public LeadResponse updateLeadDifficulty( PotentialBody potentialBody, int leadId) {
         Lead existingLead = repository.findById(leadId).orElse(null);
         existingLead.setPotential(potentialBody.getPotential());
+
         if(potentialBody.getPotential().equals("won")){
-            paymentRepository.savePayment(new Payment(){{setPayee(potentialBody.getLeadName());setRecipient(potentialBody.getClientManager());setRemarks(potentialBody.getRemarks());setClientId(potentialBody.getLeadId());setTeamLead(potentialBody.getTeamLead());}});
+//        PaymentResponse t = paymentRepository.savePayment(new Payment(){{setPayee(potentialBody.getLeadName());setRecipient(potentialBody.getClientManager());setRemarks(potentialBody.getRemarks());setClientId(potentialBody.getLeadId());setTeamLead(potentialBody.getTeamLead());}});
+        Payment p = new Payment();
+        p.setPayee(potentialBody.getLeadName());
+        p.setRecipient(potentialBody.getClientManager());
+        p.setCreatedDate(new Date());
+        p.setClientId(potentialBody.getLeadId());
+        p.setTeamLead(potentialBody.getTeamLead());
+        System.out.println(paymentRepository.savePayment(p));
         }
 
 

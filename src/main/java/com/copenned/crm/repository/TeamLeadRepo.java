@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface TeamLeadRepo extends JpaRepository<TeamLead,Integer> {
 
-    List<TeamLead> findByName(String name);
+    List<TeamLead> findAllByName(String name);
 
 }
