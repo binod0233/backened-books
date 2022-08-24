@@ -22,4 +22,6 @@ public class TeamLead extends Extended implements Memorialization {
     private int salesmanId;
     @Column(name = "client")
     private int userId;
+    @Column(name = "name")
+    private int name;
 }
