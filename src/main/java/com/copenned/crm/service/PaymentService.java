@@ -2,6 +2,7 @@ package com.copenned.crm.service;
 
 
 import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
+import com.copenned.crm.dto.SingleResponse.DashBoardEarningStats;
 import com.copenned.crm.dto.SingleResponse.PaymentResponse;
 import com.copenned.crm.dto.request.PaymentAttributeFilter;
 import com.copenned.crm.dto.request.PotentialBody;
@@ -202,6 +203,41 @@ else{
         return converter.convertToPaymentList(new ArrayList<Payment>(hset));
 
 
+
+    }
+
+
+    public DashBoardEarningStats getDahboardStats(String filter) {
+        Double totals=0.0;
+        Double change=0.0;
+        if(filter.equalsIgnoreCase("weekly"))
+        {
+            totals= repository.findTotalsBetweenDate(7);
+            double lastTwoCombined= repository.findTotalsBetweenDate(14);
+            double theOneBefore =lastTwoCombined-totals;
+            change = ((totals-theOneBefore)/theOneBefore)*100;
+
+        }
+        else if ( filter.equalsIgnoreCase("monthly"))
+        {
+            totals= repository.findTotalsBetweenDate(7);
+            double lastTwoCombined= repository.findTotalsBetweenDate(14);
+            double theOneBefore =lastTwoCombined-totals;
+            change = ((totals-theOneBefore)/theOneBefore)*100;
+
+        }
+        else if (filter.equalsIgnoreCase("semi-monthly")){
+            totals= repository.findTotalsBetweenDate(15);
+            double lastTwoCombined= repository.findTotalsBetweenDate(14);
+            double theOneBefore =lastTwoCombined-totals;
+            change = ((totals-theOneBefore)/theOneBefore)*100;
+
+        }
+        else {
+
+            return new DashBoardEarningStats(totals,change);
+        }
+        return  new DashBoardEarningStats(totals,change);
 
     }
 }
