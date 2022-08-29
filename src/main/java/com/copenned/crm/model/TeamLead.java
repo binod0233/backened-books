@@ -18,10 +18,8 @@ public class TeamLead extends Extended implements Memorialization {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teamlead_id")
     private int id;
-    @Column(name = "salesman")
-    private int salesmanId;
-    @Column(name = "client")
+    @Column(name="user_id")
     private int userId;
-    @Column(name = "name")
-    private int name;
+    @Column(name = "team_name")
+    private String teamName;
 }

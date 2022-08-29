@@ -1,6 +1,7 @@
 package com.copenned.crm.controller;
 
 import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
+import com.copenned.crm.dto.SingleResponse.DashBoardEarningStats;
 import com.copenned.crm.dto.SingleResponse.PaymentResponse;
 import com.copenned.crm.dto.request.PaymentAttributeFilter;
 import com.copenned.crm.model.Payment;
@@ -79,5 +80,11 @@ public class PaymentController {
     public PaymentsListResponse teamLeadPaymentAttributeFilter(@RequestBody @Valid PaymentAttributeFilter filter)
     {
         return paymentService.filterTeamLeadPaymentsByAttribute(filter);
+    }
+
+    @GetMapping("/payment/get-payment-stats/{filter}")
+    public DashBoardEarningStats getFilteredPaymentStats(@PathVariable String filter){
+        return paymentService.getDahboardStats(filter);
+
     }
 }

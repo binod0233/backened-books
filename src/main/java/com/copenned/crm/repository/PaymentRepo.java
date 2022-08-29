@@ -88,4 +88,9 @@ public interface PaymentRepo extends JpaRepository<Payment, Integer> {
     List<Payment> findAllByPaymentDateBetween(Date date1, Date date2);
 
 
+    @Query(value="SELECT sum(amount) from [CopennedCRM].[dbo].[payments] WHERE DATEDIFF(DAY, created_date,CURRENT_TIMESTAMP)< :daysToFilter", nativeQuery = true)
+    Double findTotalsBetweenDate(int daysToFilter);
+
+
+
 }
