@@ -4,6 +4,7 @@ package com.copenned.crm.utilities;
 import com.copenned.crm.dto.ListResponse.*;
 import com.copenned.crm.dto.SingleResponse.*;
 import com.copenned.crm.model.*;
+import com.copenned.crm.service.AppUserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,8 @@ import java.util.List;
 public class Converter {
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private AppUserService appService;
     public PaymentResponse convertPayment(Payment payment)
     {
         return mapper.map(payment, PaymentResponse.class);
@@ -32,7 +35,11 @@ public class Converter {
     }
     public TeamLeadResponse convertTeamLead(TeamLead teamLead)
     {
-        return mapper.map(teamLead, TeamLeadResponse.class);
+        AppUser user = mapper.map(appService.getAppUserById(teamLead.getUserId()),AppUser.class);
+
+        TeamLeadResponse result = mapper.map(teamLead,TeamLeadResponse.class);
+        result.setAppUser(user);
+        return  result;
     }
     public SalesManResponse convertSalesMan(SalesMan salesMan)
     {
