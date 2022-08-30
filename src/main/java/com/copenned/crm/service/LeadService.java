@@ -2,6 +2,7 @@ package com.copenned.crm.service;
 
 import com.copenned.crm.dto.ListResponse.LeadListResponse;
 import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
+import com.copenned.crm.dto.SingleResponse.DashBoardEarningStats;
 import com.copenned.crm.dto.SingleResponse.LeadResponse;
 import com.copenned.crm.dto.SingleResponse.PaymentResponse;
 import com.copenned.crm.dto.request.LeadAttributeFilter;
@@ -236,6 +237,76 @@ public class LeadService {
         return converter.convertToLeadList(new ArrayList<Lead>(hset));
 
 
+    }
+
+    public DashBoardEarningStats getPeriodicDealTotal(String filter) {
+        Double totals=0.0;
+        Double change=0.0;
+        if(filter.equalsIgnoreCase("weekly"))
+        {
+            totals= repository.findDealAmountBetweenDates(7);
+            double lastTwoCombined= repository.findDealAmountBetweenDates(14);
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
+            System.out.println(totals+" "+ lastTwoCombined+" "+theOneBefore);
+
+        }
+        else if ( filter.equalsIgnoreCase("monthly"))
+        {
+            totals= repository.findDealAmountBetweenDates(30);
+            double lastTwoCombined= repository.findDealAmountBetweenDates(60);
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
+            System.out.println(totals+" "+ lastTwoCombined+" "+theOneBefore);
+
+        }
+        else if (filter.equalsIgnoreCase("semi-monthly")){
+            totals= repository.findDealAmountBetweenDates(15);
+            double lastTwoCombined= repository.findDealAmountBetweenDates(30);
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
+            System.out.println(totals+" "+ lastTwoCombined+" "+theOneBefore);
+
+        }
+        else {
+
+            return new DashBoardEarningStats(totals,change);
+        }
+        return  new DashBoardEarningStats(totals,change);
+    }    public DashBoardEarningStats getPeriodicLeadStats(String filter) {
+        Double totals=0.0;
+        Double change=0.0;
+        if(filter.equalsIgnoreCase("weekly"))
+        {
+            totals= repository.findLeadsBetweenDates(7);
+            double lastTwoCombined= repository.findLeadsBetweenDates(14);
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
+            System.out.println(totals+" "+ lastTwoCombined+" "+theOneBefore);
+
+        }
+        else if ( filter.equalsIgnoreCase("monthly"))
+        {
+            totals= repository.findLeadsBetweenDates(30);
+            double lastTwoCombined= repository.findLeadsBetweenDates(60);
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
+            System.out.println(totals+" "+ lastTwoCombined+" "+theOneBefore);
+
+        }
+        else if (filter.equalsIgnoreCase("semi-monthly")){
+            totals= repository.findLeadsBetweenDates(15);
+            double lastTwoCombined= repository.findLeadsBetweenDates(30);
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
+            System.out.println(totals+" "+ lastTwoCombined+" "+theOneBefore);
+
+        }
+        else {
+
+            return new DashBoardEarningStats(totals,change);
+        }
+        return  new DashBoardEarningStats(totals,change);
     }
 
 }

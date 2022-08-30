@@ -1,5 +1,6 @@
 package com.copenned.crm.dto.SingleResponse;
 
+import com.copenned.crm.model.Lead;
 import com.copenned.crm.utilities.MemorializationResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +33,5 @@ public class PaymentResponse  {
     private String serviceType;
     private String receipt;
     private String paymentMethod;
+    private Lead leadInfo;
 }

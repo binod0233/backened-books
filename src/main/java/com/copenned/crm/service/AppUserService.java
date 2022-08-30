@@ -3,6 +3,7 @@ package com.copenned.crm.service;
 import com.copenned.crm.dto.ListResponse.AppUsersListResponse;
 import com.copenned.crm.dto.SingleResponse.AppUserResponse;
 import com.copenned.crm.dto.SingleResponse.TeamLeadResponse;
+import com.copenned.crm.dto.request.AppUserRequest;
 import com.copenned.crm.model.AppUser;
 //import com.copenned.crm.model.CustomAppUserDetails;
 import com.copenned.crm.model.SalesMan;
@@ -32,21 +33,23 @@ public class AppUserService{
 
 
 
-    public AppUserResponse saveAppUser(AppUser appUser) {
-        AppUser user = repository.save(appUser);
+    public AppUserResponse saveAppUser(AppUserRequest request) {
+        AppUser user = repository.save(request.getUser());
 
         if (Objects.nonNull(user)) {
-            if (appUser.getRole().equalsIgnoreCase("teamlead")) {
+            if (request.getUser().getRole().equalsIgnoreCase("teamlead")) {
                 TeamLead teamLead = new TeamLead();
                 teamLead.setUserId(user.getId());
                 teamLead.setTeamName("Default");
                 leadrepo.save(teamLead);
 
             }
-            else if (appUser.getRole().equalsIgnoreCase("client-manager"))
+            else if (request.getUser().getRole().equalsIgnoreCase("client-manager"))
             {
                 SalesMan salesMan = new SalesMan();
                 salesMan.setUserId(user.getId());
+                salesMan.setTeamLead(request.getLeadName());
+
                 slaesManRepo.save(salesMan);
 
             }

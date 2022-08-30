@@ -207,30 +207,34 @@ else{
     }
 
 
+
     public DashBoardEarningStats getDahboardStats(String filter) {
         Double totals=0.0;
         Double change=0.0;
+        System.out.println(filter);
         if(filter.equalsIgnoreCase("weekly"))
         {
             totals= repository.findTotalsBetweenDate(7);
             double lastTwoCombined= repository.findTotalsBetweenDate(14);
-            double theOneBefore =lastTwoCombined-totals;
-            change = ((totals-theOneBefore)/theOneBefore)*100;
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
 
         }
         else if ( filter.equalsIgnoreCase("monthly"))
         {
-            totals= repository.findTotalsBetweenDate(7);
-            double lastTwoCombined= repository.findTotalsBetweenDate(14);
-            double theOneBefore =lastTwoCombined-totals;
-            change = ((totals-theOneBefore)/theOneBefore)*100;
+            totals= repository.findTotalsBetweenDate(30);
+            double lastTwoCombined= repository.findTotalsBetweenDate(60);
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
+            System.out.println(totals+" "+ lastTwoCombined+" "+theOneBefore);
 
         }
         else if (filter.equalsIgnoreCase("semi-monthly")){
             totals= repository.findTotalsBetweenDate(15);
-            double lastTwoCombined= repository.findTotalsBetweenDate(14);
-            double theOneBefore =lastTwoCombined-totals;
-            change = ((totals-theOneBefore)/theOneBefore)*100;
+            double lastTwoCombined= repository.findTotalsBetweenDate(30);
+            double theOneBefore = lastTwoCombined>totals ? lastTwoCombined-totals:0;
+            change =theOneBefore >0 ? ((totals-theOneBefore)/theOneBefore)*100 : 0;
+
 
         }
         else {
