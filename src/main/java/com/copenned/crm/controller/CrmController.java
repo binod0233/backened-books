@@ -2,6 +2,7 @@ package com.copenned.crm.controller;
 
 import com.copenned.crm.dto.ListResponse.AppUsersListResponse;
 import com.copenned.crm.dto.SingleResponse.AppUserResponse;
+import com.copenned.crm.dto.request.AppUserRequest;
 import com.copenned.crm.model.AppUser;
 import com.copenned.crm.service.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class CrmController {
 
 
     @PostMapping("/user/registerAppUser")
-    public AppUserResponse addAppUser(@RequestBody AppUser appUser){
+    public AppUserResponse addAppUser(@RequestBody AppUserRequest appUser){
         System.out.println(appUser);
         return service.saveAppUser(appUser);
     }

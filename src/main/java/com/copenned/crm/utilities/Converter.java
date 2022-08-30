@@ -5,6 +5,7 @@ import com.copenned.crm.dto.ListResponse.*;
 import com.copenned.crm.dto.SingleResponse.*;
 import com.copenned.crm.model.*;
 import com.copenned.crm.service.AppUserService;
+import com.copenned.crm.service.LeadService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,9 +22,14 @@ public class Converter {
     private ModelMapper mapper;
     @Autowired
     private AppUserService appService;
+    @Autowired
+    private LeadService leadService;
     public PaymentResponse convertPayment(Payment payment)
     {
-        return mapper.map(payment, PaymentResponse.class);
+        Lead lead = mapper.map(leadService.getLeadById(payment.getClientId()), Lead.class);
+        PaymentResponse response= mapper.map(payment,PaymentResponse.class);
+        response.setLeadInfo(lead);
+        return response;
     }
     public AppUserResponse convertAppUser(AppUser appUser)
     {
@@ -43,10 +49,15 @@ public class Converter {
     }
     public SalesManResponse convertSalesMan(SalesMan salesMan)
     {
-        return mapper.map(salesMan, SalesManResponse.class);
+        AppUser user = mapper.map(appService.getAppUserById(salesMan.getUserId()),AppUser.class);
+
+        SalesManResponse result = mapper.map(salesMan,SalesManResponse.class);
+        result.setAppUser(user);
+        return result;
     }
     public AccountResponse convertAccount(Account account)
     {
+
         return mapper.map(account, AccountResponse.class);
     }
 
