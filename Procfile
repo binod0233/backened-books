@@ -1,1 +1,1 @@
-web: java -jar target/books-backend
+web: java -jar target/books-backend.jar
