@@ -89,6 +89,9 @@
 		</dependency>
 
 	</dependencies>
+	<build>
+		<finalName>books-backend</finalName> 
+	</build>
 
 	<build>
 		<plugins>
