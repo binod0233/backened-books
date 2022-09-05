@@ -163,6 +163,21 @@ public class LeadService {
         return converter.convertLead(repository.save(existingLead));
     }
 
+    public LeadResponse updateLead( Lead lead,int leadId) {
+        Lead existingLead = repository.findById(leadId).orElse(null);
+        existingLead.setServicePlan(lead.getServicePlan());
+        existingLead.setServiceType(lead.getServiceType());
+        existingLead.setSource(lead.getSource());
+        existingLead.setPotential(lead.getPotential());
+        existingLead.setSocialMedia(lead.getSocialMedia());
+        existingLead.setLastFollowUpDate(lead.getLastFollowUpDate());
+        existingLead.setNextFollowUpDate(lead.getNextFollowUpDate());
+        existingLead.setDiscipline(lead.getDiscipline());
+
+
+        return converter.convertLead(repository.save(existingLead));
+    }
+
     public LeadResponse updateLeadTeamLead(Lead lead) {
         Lead existingLead = repository.findById(lead.getId()).orElse(null);
         existingLead.setName(lead.getName());

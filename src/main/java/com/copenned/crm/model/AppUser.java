@@ -40,7 +40,7 @@ public class AppUser implements Memorialization{
     @Column(name = "last_modified_date")
     private Date lastModifiedDate;
     @Column(name = "activeFlag")
-    private Boolean activeFlag;
+    private int activeFlag = 1;
 
 
     public AppUser(AppUser appUser) {

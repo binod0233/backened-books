@@ -25,8 +25,8 @@ public class Lead extends Extended implements Memorialization {
     private String email;
     @Column(name="work")
     private String  work;
-//    @Column(name="country")
-//    private String  country;
+    @Column(name="country")
+    private String  country;
     @Column(name="gender")
     private String gender;
     @Column (name="client_background")
@@ -44,7 +44,7 @@ public class Lead extends Extended implements Memorialization {
     @Column(name = "social_media")
     private String socialMedia;
     @Column(name = "client_since")
-    private Date clientSince;
+    private Date clientSince = new Date();
     @Column(name="service_type")
     private String serviceType;
     @Column(name="service_plan")

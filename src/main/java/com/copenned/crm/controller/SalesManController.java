@@ -31,6 +31,12 @@ public class SalesManController {
         return salesManService.getSalesManById(id);
     }
 
+    @PostMapping("/salesman/edit/{id}")
+    public SalesManResponse editSalesMan(@PathVariable int id, @RequestBody SalesMan salesMan){
+
+        return salesManService.editSalesMan(id,salesMan);
+    }
+
     @GetMapping("/salesman/salesmen/getAllClientManagersOfATeamLead/{teamlead}")
     public SalesManListResponse findAllByTeamLead(@PathVariable String teamlead){
         return salesManService.getSalesmanByTeamLead(teamlead);

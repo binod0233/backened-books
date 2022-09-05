@@ -99,6 +99,10 @@ public class LeadsController {
 //        paymentService.addPayment(potentialBody);
         return leadService.updateLeadDifficulty(potentialBody,leadId);
     }
+    @PutMapping("/lead/edit/{leadId}")
+    public LeadResponse updateLead(@RequestBody Lead lead, @PathVariable int leadId){
+        return leadService.updateLead(lead,leadId);
+    }
 
     @PutMapping("/lead/teamlead/update")
     public LeadResponse updateLeadTeamLead(@RequestBody  Lead lead){
