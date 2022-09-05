@@ -73,6 +73,9 @@ public interface LeadRepo extends JpaRepository<Lead,Integer> {
 
     @Query(value = "SELECT * FROM [CopennedCRM].[dbo].[leads] where created_date=:createdDate AND teamLead = :recipient   ", nativeQuery = true)
     List<Lead> findAllTeamLeadLeadsByCreatedDate(Date createdDate,  String recipient);
-
+@Query(value ="SELECT  SUM(deal_value) FROM [CopennedCRM].[dbo].[leads] WHERE DATEDIFF(DAY, created_date,CURRENT_TIMESTAMP)< :days" ,nativeQuery = true)
+    Double findDealAmountBetweenDates(int days);
+    @Query(value ="SELECT  count(client_id) FROM [CopennedCRM].[dbo].[leads] WHERE DATEDIFF(DAY, created_date,CURRENT_TIMESTAMP)< :days" ,nativeQuery = true)
+    Double findLeadsBetweenDates(int days);
 
 }

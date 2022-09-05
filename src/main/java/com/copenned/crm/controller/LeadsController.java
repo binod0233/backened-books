@@ -2,6 +2,7 @@ package com.copenned.crm.controller;
 
 import com.copenned.crm.dto.ListResponse.LeadListResponse;
 import com.copenned.crm.dto.ListResponse.PaymentsListResponse;
+import com.copenned.crm.dto.SingleResponse.DashBoardEarningStats;
 import com.copenned.crm.dto.SingleResponse.LeadResponse;
 import com.copenned.crm.dto.SingleResponse.PaymentResponse;
 import com.copenned.crm.dto.request.LeadAttributeFilter;
@@ -113,6 +114,15 @@ public class LeadsController {
     public String deleteLead(@PathVariable int id){
         return leadService.deleteLead(id);
     }
-
+        @GetMapping("/lead/get-deal-stats/{days}")
+    public DashBoardEarningStats getDealStatsOnInterval(@PathVariable String days)
+        {
+            return  leadService.getPeriodicDealTotal(days);
+        }
+         @GetMapping("/lead/get-lead-stats/{days}")
+    public DashBoardEarningStats getLeadStatsOnInterval(@PathVariable String days)
+        {
+            return  leadService.getPeriodicLeadStats(days);
+        }
 
 }

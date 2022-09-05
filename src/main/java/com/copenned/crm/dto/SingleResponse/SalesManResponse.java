@@ -1,5 +1,6 @@
 package com.copenned.crm.dto.SingleResponse;
 
+import com.copenned.crm.model.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +20,5 @@ public class SalesManResponse {
     private String team;
     private String teamLead;
     private int userId;
+    private AppUser appUser;
 }
