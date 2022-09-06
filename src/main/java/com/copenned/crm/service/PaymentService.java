@@ -8,6 +8,7 @@ import com.copenned.crm.dto.request.PaymentAttributeFilter;
 import com.copenned.crm.dto.request.PotentialBody;
 import com.copenned.crm.model.Payment;
 import com.copenned.crm.repository.PaymentRepo;
+import com.copenned.crm.repository.SalesManRepo;
 import com.copenned.crm.utilities.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,12 @@ public class PaymentService {
     private PaymentRepo repository;
 
     @Autowired
+    private SalesManRepo salesManRepository;
+
+    @Autowired
     private Converter converter;
 
     public PaymentResponse savePayment(Payment payment){
-        System.out.println("trigerred");
         return converter.convertPayment(repository.save(payment));
 
 
