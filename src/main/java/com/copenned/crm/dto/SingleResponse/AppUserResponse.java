@@ -16,7 +16,7 @@ public class AppUserResponse {
     private int id;
     private String userName;
     private String role;
-
+    private int roleId;
     private String email;
     private String firstName;
     private String lastName;

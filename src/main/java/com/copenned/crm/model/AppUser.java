@@ -42,6 +42,9 @@ public class AppUser implements Memorialization{
     @Column(name = "activeFlag")
     private int activeFlag = 1;
 
+    @Column(name = "role_id")
+    private int roleId;
+
 
     public AppUser(AppUser appUser) {
     }

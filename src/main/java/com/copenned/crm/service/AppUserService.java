@@ -42,21 +42,26 @@ public class AppUserService{
                 teamLead.setUserId(user.getId());
                 teamLead.setTeamName("Default");
                 leadrepo.save(teamLead);
+                user.setRoleId(teamLead.getId());
+
 
             }
-            else if (request.getUser().getRole().equalsIgnoreCase("client-manager"))
+            else if (request.getUser().getRole().equalsIgnoreCase("clientmanager"))
             {
                 SalesMan salesMan = new SalesMan();
                 salesMan.setUserId(user.getId());
                 salesMan.setTeamLead(request.getLeadName());
 
                 slaesManRepo.save(salesMan);
+                user.setRoleId(salesMan.getId());
 
             }
             else {
                 return null;
             }
-
+            AppUser tempUser = repository.findByEmail(user.getEmail());
+            tempUser.setRoleId(user.getRoleId());
+            repository.save(tempUser);
 
 //        return converter.convertAppUser(repository.save(appUser));
 
